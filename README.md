@@ -1,36 +1,196 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧪 UIForge Component Tester
 
-## Getting Started
+A Next.js app for testing and previewing generated npm components from UIForge in isolation.
 
-First, run the development server:
+## 🚀 Quick Start
+
+### 1. Install Dependencies
+
+```bash
+npm install
+```
+
+### 2. Start Dev Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will run on **http://localhost:3005** (to avoid conflicts with other UIForge apps)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Testing Generated Components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Install a Component
 
-## Learn More
+Use the built-in test script to install any generated component:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run test-component <package-name>
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Example:**
+```bash
+npm run test-component @uiforge/button-primary
+npm run test-component buttonvariant-lightmode
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Use the Component
 
-## Deploy on Vercel
+1. **Import** the component in `app/page.tsx`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```typescript
+import ButtonComponent from '@uiforge/button-primary';
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. **Render** it in the Component Test Area:
+
+```tsx
+<div className="border-2 border-dashed border-gray-300 rounded-lg p-12">
+  <ButtonComponent variant="primary">
+    Click Me
+  </ButtonComponent>
+</div>
+```
+
+3. **View** at http://localhost:3005
+
+## 🛠️ Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server on port 3005 |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server on port 3005 |
+| `npm run test-component <name>` | Install and test a component |
+| `npm run lint` | Run ESLint |
+
+## 📂 Project Structure
+
+```
+uiforge-component-tester/
+├── app/
+│   ├── page.tsx          # Main test page - add components here
+│   ├── layout.tsx        # Root layout
+│   └── globals.css       # Global styles
+├── scripts/
+│   └── test-component.js # Component installation script
+├── package.json          # Dependencies and scripts
+└── README.md            # This file
+```
+
+## 🎨 Features
+
+- **Isolated Testing**: Runs on port 3005 to avoid conflicts
+- **Hot Reload**: Next.js fast refresh for instant feedback
+- **TypeScript**: Full type safety
+- **Tailwind CSS**: Utility-first styling
+- **Easy Installation**: Simple script to install components
+
+## 💡 Usage Example
+
+### Full Workflow
+
+```bash
+# 1. Generate a component via UIForge codegen service
+# (This happens in uiforge-codegen)
+
+# 2. Install the generated component
+npm run test-component @uiforge/my-button
+
+# 3. Import in app/page.tsx
+# import MyButton from '@uiforge/my-button';
+
+# 4. Use it
+# <MyButton>Click Me</MyButton>
+
+# 5. View and test at http://localhost:3005
+```
+
+## 🔧 Configuration
+
+### Change Port
+
+Edit `package.json` to change the port:
+
+```json
+{
+  "scripts": {
+    "dev": "next dev -p 3006"  // Change to any port
+  }
+}
+```
+
+### Add Custom Styles
+
+Modify `app/globals.css` for custom global styles.
+
+## 🧩 Testing Multiple Components
+
+You can test multiple components simultaneously:
+
+```tsx
+// app/page.tsx
+import Button from '@uiforge/button-primary';
+import Card from '@uiforge/card-default';
+import Input from '@uiforge/input-text';
+
+export default function Home() {
+  return (
+    <div>
+      <Button>Test Button</Button>
+      <Card title="Test Card">Card content</Card>
+      <Input placeholder="Test Input" />
+    </div>
+  );
+}
+```
+
+## 🐛 Troubleshooting
+
+### Component Not Found
+
+If a component fails to import:
+
+1. Check if it's installed: `npm list <package-name>`
+2. Verify the import path matches the package name
+3. Check for TypeScript errors: `npm run build`
+
+### Port Already in Use
+
+If port 3005 is in use:
+
+```bash
+# Find process using port 3005
+lsof -i :3005
+
+# Kill the process
+kill -9 <PID>
+
+# Or change the port in package.json
+```
+
+### Styling Issues
+
+If component styles don't appear:
+
+1. Check if the component includes its own CSS
+2. Verify Tailwind is configured correctly
+3. Import component styles if needed
+
+## 📝 Notes
+
+- Components are installed as regular npm packages
+- All installed components appear in `node_modules/`
+- Use `npm uninstall <package>` to remove test components
+- The app uses Next.js 16 with App Router
+- TypeScript and ESLint are pre-configured
+
+## 🔗 Related Projects
+
+- **uiforge-codegen**: Generates the components
+- **uiforge-frontend**: Main UIForge app
+- **uiforge-backend**: API server
+
+## 📄 License
+
+Part of the UIForge project by Artemis Design Labs

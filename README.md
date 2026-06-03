@@ -72,11 +72,21 @@ uiforge-component-tester/
 │   ├── page.tsx          # Main test page - add components here
 │   ├── layout.tsx        # Root layout
 │   └── globals.css       # Global styles
+├── components/
+│   └── PureTailwindButton.tsx  # Local sample component (no npm install needed)
 ├── scripts/
 │   └── test-component.js # Component installation script
 ├── package.json          # Dependencies and scripts
 └── README.md            # This file
 ```
+
+### Local sample components
+
+In addition to installing generated npm packages, `components/` holds local sample
+components you can import directly into `app/page.tsx` for quick checks — e.g.
+`PureTailwindButton` (a self-contained Tailwind button extending
+`React.ButtonHTMLAttributes`). Use these to sanity-check the sandbox without publishing a
+package first.
 
 ## 🎨 Features
 

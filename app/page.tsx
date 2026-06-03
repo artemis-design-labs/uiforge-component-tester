@@ -1,3 +1,8 @@
+'use client';
+import React from 'react';
+// Import a working Tailwind component (compatible with React 19)
+import PureTailwindButton from '@/components/PureTailwindButton';
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
@@ -10,6 +15,14 @@ export default function Home() {
           <p className="text-gray-600 text-lg">
             Test and preview generated npm components in isolation
           </p>
+          <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded">
+            <p className="text-sm text-green-800">
+              ✅ <strong>Component Loaded:</strong> PureTailwindButton (Local)
+            </p>
+            <p className="text-xs text-green-700 mt-1">
+              Pure Tailwind CSS - React 19 compatible! 🎉
+            </p>
+          </div>
         </div>
 
         {/* Quick Start */}
@@ -49,13 +62,31 @@ export default function Home() {
           </p>
 
           {/* Add your test components here */}
-          <div className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center">
-            <p className="text-gray-400">
-              Your components will appear here...
-            </p>
-            <p className="text-sm text-gray-400 mt-2">
-              Edit this page to add your imported components
-            </p>
+          <div className="border-2 border-solid border-blue-300 rounded-lg p-12 bg-gradient-to-br from-white to-blue-50">
+            <h3 className="text-lg font-semibold text-gray-900 mb-6">
+              🎨 Generated Component Preview
+            </h3>
+            <div className="flex flex-col items-center gap-6">
+              {/* Pure Tailwind button component */}
+              <div className="p-6 bg-white rounded-lg shadow-md">
+                <PureTailwindButton onClick={() => alert('Button clicked!')}>
+                  Click Me!
+                </PureTailwindButton>
+              </div>
+              <div className="text-sm text-gray-600">
+                <code className="bg-gray-100 px-2 py-1 rounded">
+                  &lt;PureTailwindButton&gt;Click Me!&lt;/PureTailwindButton&gt;
+                </code>
+              </div>
+              <div className="text-xs text-gray-500 bg-gray-50 p-3 rounded mt-4">
+                <strong>Component Details:</strong><br/>
+                • Pure Tailwind CSS styling<br/>
+                • React 19 compatible<br/>
+                • No external UI library dependencies<br/>
+                • Hover effects and animations included<br/>
+                • Fully customizable via className prop
+              </div>
+            </div>
           </div>
 
           {/* Example Usage */}
